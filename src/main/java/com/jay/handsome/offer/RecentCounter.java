@@ -1,4 +1,4 @@
-package com.jay.handsome;
+package com.jay.handsome.offer;
 
 import java.util.Deque;
 import java.util.HashMap;

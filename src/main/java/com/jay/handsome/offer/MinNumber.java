@@ -1,4 +1,4 @@
-package com.jay.handsome;
+package com.jay.handsome.offer;
 
 import java.util.Arrays;
 import java.util.List;

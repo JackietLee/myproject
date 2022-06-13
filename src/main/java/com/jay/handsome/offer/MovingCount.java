@@ -1,7 +1,4 @@
-package com.jay.handsome;
-
-import java.util.LinkedList;
-import java.util.Queue;
+package com.jay.handsome.offer;
 
 /**
  * https://leetcode.cn/problems/ji-qi-ren-de-yun-dong-fan-wei-lcof/

@@ -1,4 +1,4 @@
-package com.jay.handsome;
+package com.jay.handsome.offer;
 
 import java.util.ArrayList;
 
@@ -30,7 +30,17 @@ public class PrintNumbers {
         return true;
     }
 
+    public int[] printNumbers1(int n) {
+        if (n<=0) return null;
+        int pow = (int)Math.pow(10, n);
+        int[] ints = new int[pow-1];
+        for (int i = 0; i < (pow-1); i++) {
+            ints[i] = i+1;
+        }
+        return ints;
+    }
+
     public static void main(String[] args) {
-        boolean legal = new PrintNumbers().isLegal(1000, 3);
+        new PrintNumbers().printNumbers1(1);
     }
 }

@@ -1,4 +1,4 @@
-package com.jay.handsome;
+package com.jay.handsome.offer;
 
 /**
  * 注释

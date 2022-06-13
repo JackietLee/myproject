@@ -1,4 +1,4 @@
-package com.jay.handsome;
+package com.jay.handsome.offer;
 
 /**
  * https://leetcode.cn/problems/jian-sheng-zi-ii-lcof/

@@ -1,4 +1,4 @@
-package com.jay.handsome;
+package com.jay.handsome.offer;
 
 /**
  * https://leetcode.cn/problems/er-jin-zhi-zhong-1de-ge-shu-lcof/

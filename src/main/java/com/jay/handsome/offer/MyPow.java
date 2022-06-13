@@ -1,4 +1,4 @@
-package com.jay.handsome;
+package com.jay.handsome.offer;
 
 /**
  * https://leetcode.cn/problems/shu-zhi-de-zheng-shu-ci-fang-lcof/submissions/
