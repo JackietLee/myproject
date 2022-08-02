@@ -15,6 +15,7 @@ import java.util.Queue;
 public class LevelOrderII {
 
     Queue<Body> queue = new LinkedList<Body>();
+    Queue<TreeNode> queue1 = new LinkedList<TreeNode>();
     List<List<Integer>> list = new ArrayList<List<Integer>>();
 
     public List<List<Integer>> levelOrder(TreeNode root) {
@@ -53,7 +54,7 @@ public class LevelOrderII {
         TreeNode node;
     }
 
-    public class TreeNode {
+    public static class TreeNode {
         int val;
         TreeNode left;
         TreeNode right;
@@ -61,5 +62,41 @@ public class LevelOrderII {
         TreeNode(int x) {
             val = x;
         }
+    }
+
+    public List<List<Integer>> levelOrder2(TreeNode root) {
+        if (root != null) {
+            queue1.add(root);
+        }
+        while (!queue1.isEmpty()) {
+            List<Integer> integers = new ArrayList<>();
+            list.add(integers);
+            int length = queue1.size();
+            for (int i = 0; i < length; i++) {
+                TreeNode poll = queue1.poll();
+                integers.add(poll.val);
+                if (poll.left != null) {
+                    queue1.add(poll.left);
+                }
+                if (poll.right != null) {
+                    queue1.add(poll.right);
+                }
+            }
+        }
+        return list;
+    }
+
+    public static void main(String[] args) {
+        TreeNode treeNode = new TreeNode(3);
+        TreeNode treeNode1 = new TreeNode(9);
+        TreeNode treeNode2 = new TreeNode(20);
+        TreeNode treeNode3 = new TreeNode(15);
+        TreeNode treeNode4 = new TreeNode(7);
+
+        treeNode.left = treeNode1;
+        treeNode.right = treeNode2;
+        treeNode2.left = treeNode3;
+        treeNode2.right = treeNode4;
+        new LevelOrderII().levelOrder2(treeNode);
     }
 }
