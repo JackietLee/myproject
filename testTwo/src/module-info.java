@@ -1,0 +1,3 @@
+module testTwo {
+    requires testOne;
+}
