@@ -1,0 +1,10 @@
+package com.test.scala
+
+import com.jay.handsome.cglib.Person
+
+object Test2 {
+  def main(args: Array[String]): Unit = {
+    val name = new Person().getName
+    print(name)
+  }
+}
