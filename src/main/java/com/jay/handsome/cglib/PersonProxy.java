@@ -5,9 +5,11 @@ import net.sf.cglib.proxy.Enhancer;
 import net.sf.cglib.proxy.MethodInterceptor;
 import net.sf.cglib.proxy.MethodProxy;
 import org.springframework.boot.devtools.restart.classloader.RestartClassLoader;
+import org.springframework.util.ReflectionUtils;
 
 import javax.annotation.processing.AbstractProcessor;
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.net.URL;
 import java.util.Enumeration;
@@ -20,25 +22,45 @@ import java.util.Enumeration;
  */
 public class PersonProxy implements MethodInterceptor {
 
+    private final Object target;
+
+    public PersonProxy(Object target) {
+        this.target = target;
+    }
+
     @Override
     public Object intercept(Object o, Method method, Object[] objects, MethodProxy methodProxy) throws Throwable {
-        System.out.println("这里可以插入执行关键代码之前的逻辑");
-        Object o1 = methodProxy.invokeSuper(o, objects);//关键代码:
-        System.out.println("这里可以插入执行关键代码之后的逻辑");
+//        System.out.println("这里可以插入执行关键代码之前的逻辑");
+//        Object o1 = methodProxy.invokeSuper(o, objects);//关键代码:
+        Object o1 = methodProxy.invoke(target, objects);//关键代码:
+//        System.out.println("这里可以插入执行关键代码之后的逻辑");
         return o1;
     }
 
-    public static void main(String[] args) throws IOException {
-        System.setProperty(DebuggingClassWriter.DEBUG_LOCATION_PROPERTY, "D:\\code");
+    public Object getProxyInstance() {
+        //1. 创建一个工具类
+        Enhancer enhancer = new Enhancer();
+        //2. 设置父类
+        enhancer.setSuperclass(target.getClass());
+        //3. 设置回调函数
+        enhancer.setCallback(this);
+        //4. 创建子类对象，即代理对象
+        return enhancer.create();
+    }
 
-        Enhancer enhancer = new Enhancer();  // 通过CGLIB动态代理获取代理对象的过程
-        enhancer.setSuperclass(Person.class);     // 设置enhancer对象的父类
-        enhancer.setCallback(new PersonProxy());    // 设置enhancer的回调对象
-        Person user = (Person) enhancer.create();   // 创建代理对象
+    public static void main(String[] args) throws IOException, NoSuchFieldException {
+        System.setProperty(DebuggingClassWriter.DEBUG_LOCATION_PROPERTY, "D:\\code");
+        Person person = new Person();
+        PersonProxy personProxy = new PersonProxy(person);
+        Person user = (Person) personProxy.getProxyInstance();   // 创建代理对象
         String world = user.getName();
         System.out.println(world);
-        user.name = "jay";// 通过代理对象调用目标方法
-        System.out.println(user.name);
+        Field name = Person.class.getDeclaredField("name");
+        person.name = "jay";
+//        person.setName("jay");
+        System.out.println(user.getName());
+        user.setName("jay1");
+        System.out.println(user.getName());
 
 //        short i = (short)(0xFFFF);
 //        System.out.println(i);
