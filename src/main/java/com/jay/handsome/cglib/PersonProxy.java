@@ -12,6 +12,9 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.net.URL;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Enumeration;
 
 /**
@@ -57,6 +60,7 @@ public class PersonProxy implements MethodInterceptor {
         System.out.println(world);
         Field name = Person.class.getDeclaredField("name");
         person.name = "jay";
+        ReflectionUtils.setField(name, person, "jay");
 //        person.setName("jay");
         System.out.println(user.getName());
         user.setName("jay1");
@@ -72,6 +76,8 @@ public class PersonProxy implements MethodInterceptor {
 //        ClassLoader classLoader1 = AbstractProcessor.class.getClassLoader();
 //        System.out.println(classLoader1);
 //        ClassLoader classLoader = person.getClass().getClassLoader();
-
+        String jay = URLEncoder.encode("jay", StandardCharsets.UTF_8);
+        String decode = URLDecoder.decode(jay, StandardCharsets.UTF_8);
+        System.out.println(decode);
     }
 }
