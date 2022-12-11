@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.jay.handsome</groupId>
-    <artifactId>arithmetic</artifactId>
+    <artifactId>myproject</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
