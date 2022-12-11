@@ -1,4 +1,4 @@
-package com.test.scala
+package scala
 
 import com.jay.handsome.cglib.Person
 
