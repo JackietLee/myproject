@@ -12,6 +12,6 @@ WORKDIR /opt
 #ENV MODULE_NAME ${MODULE_NAME}
 #ENV LANG C.UTF-8
 
-COPY target/classes .
+COPY ../target/classes .
 CMD cd target/classes
 CMD java com.jay.handsome.jdkproxy.ProxyInvocationHandler
