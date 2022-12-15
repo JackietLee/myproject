@@ -18,5 +18,12 @@ public class Person {
         this.name = name;
     }
 
+    public void one() {
+        System.out.println(1);
+        two();
+    }
 
+    public void two() {
+        System.out.println(2);
+    }
 }

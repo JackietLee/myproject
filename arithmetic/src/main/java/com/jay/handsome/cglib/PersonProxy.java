@@ -28,11 +28,11 @@ public class PersonProxy implements MethodInterceptor {
     }
 
     @Override
-    public Object intercept(Object o, Method method, Object[] objects, MethodProxy methodProxy) throws Throwable {
-//        System.out.println("这里可以插入执行关键代码之前的逻辑");
-//        Object o1 = methodProxy.invokeSuper(o, objects);//只需要代理对象，如果所有指定类的对象都需要被代理，可以使用invokeSuper  this指代代理对象
-        Object o1 = methodProxy.invoke(target, objects);//需要被代理的对象，如果被代理类的对象一部分需要代理，一部分不需要被代理  跟spring一样，this指代被代理的对象
-//        System.out.println("这里可以插入执行关键代码之后的逻辑");
+    public Object intercept(Object o, Method method, Object[] args, MethodProxy methodProxy) throws Throwable {
+        System.out.println("这里可以插入执行关键代码之前的逻辑");
+        Object o1 = methodProxy.invokeSuper(o, args);//只需要代理对象，如果所有指定类的对象都需要被代理，可以使用invokeSuper  this指代代理对象
+//        Object o1 = methodProxy.invoke(target, args);//需要被代理的对象，如果被代理类的对象一部分需要代理，一部分不需要被代理  跟spring一样，this指代被代理的对象
+        System.out.println("这里可以插入执行关键代码之后的逻辑");
         return o1;
     }
 
@@ -47,7 +47,19 @@ public class PersonProxy implements MethodInterceptor {
         return enhancer.create();
     }
 
-    public static void main(String[] args) throws IOException, NoSuchFieldException {
+    public static void main(String[] args) {
+//        try {
+//            test1();
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        } catch (NoSuchFieldException e) {
+//            throw new RuntimeException(e);
+//        }
+
+        test2();
+    }
+
+    public static void test1()  throws IOException, NoSuchFieldException{
         System.setProperty(DebuggingClassWriter.DEBUG_LOCATION_PROPERTY, "D:\\code");
         Person person = new Person();
         PersonProxy personProxy = new PersonProxy(person);
@@ -75,5 +87,12 @@ public class PersonProxy implements MethodInterceptor {
         String jay = URLEncoder.encode("jay", StandardCharsets.UTF_8);
         String decode = URLDecoder.decode(jay, StandardCharsets.UTF_8);
         System.out.println(decode);
+    }
+
+    public static void test2(){
+        Person person = new Person();
+        PersonProxy personProxy = new PersonProxy(person);
+        Person user = (Person) personProxy.getProxyInstance();   // 创建代理对象
+        user.one();
     }
 }

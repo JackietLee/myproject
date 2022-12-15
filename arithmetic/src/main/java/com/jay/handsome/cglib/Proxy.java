@@ -14,12 +14,22 @@ import java.lang.reflect.Method;
  * @date 2022/6/21 17:29
  */
 public class Proxy implements MethodInterceptor {
+    /**
+     *
+     * @param o "this", the enhanced object
+     * @param method intercepted Method
+     * @param objects argument array; primitive types are wrapped
+     * @param methodProxy used to invoke super (non-intercepted method); may be called
+     * as many times as needed
+     * @return
+     * @throws Throwable
+     */
     @Override
-    public Object intercept(Object o, Method method, Object[] objects, MethodProxy methodProxy) throws Throwable {
+    public Object intercept(Object o, Method method, Object[] args, MethodProxy methodProxy) throws Throwable {
         System.out.println("这里可以插入执行关键代码之前的逻辑");
 //        Object o1 = methodProxy.invokeSuper(o, objects);//关键代码:
         System.out.println("这里可以插入执行关键代码之后的逻辑");
-        return objects[0];
+        return args[0];
     }
 
     public static void main(String[] args) {

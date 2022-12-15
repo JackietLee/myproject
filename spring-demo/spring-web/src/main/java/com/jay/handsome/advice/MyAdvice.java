@@ -3,6 +3,7 @@ package com.jay.handsome.advice;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 
@@ -35,6 +36,10 @@ public class MyAdvice {
         return result;
     }
 
+    @Before("logPointCut()")
+    public void before() throws Throwable {
+        System.out.println("before ");
+    }
 
     @Pointcut("execution(* com.jay.handsome.service.MyService.myFunc())")
     private void eatCarrot(){}
