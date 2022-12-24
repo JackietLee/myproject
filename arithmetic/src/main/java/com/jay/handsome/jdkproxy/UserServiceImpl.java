@@ -34,4 +34,15 @@ public class UserServiceImpl implements UserService {
     public void set(String name) {
         this.name = name;
     }
+
+    @Override
+    public void a() {
+        System.out.println("a");
+        b();
+    }
+
+    @Override
+    public void b() {
+        System.out.println("b");
+    }
 }

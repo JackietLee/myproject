@@ -10,6 +10,7 @@
     <modules>
         <module>spring-dependencies</module>
         <module>spring-web</module>
+        <module>spring-data</module>
     </modules>
     <properties>
         <maven.compiler.source>11</maven.compiler.source>

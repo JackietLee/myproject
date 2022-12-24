@@ -13,4 +13,6 @@ public interface UserService {
     public void update();
     public void select();
     public void set(String name);
+    public void a();
+    public void b();
 }

@@ -29,8 +29,10 @@ public class ProxyInvocationHandler implements InvocationHandler {
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         //动态代理的本质，就是使用反射机制实现；
+        System.out.println(1);
         Object result = method.invoke(target, args);
-
+//        Object result = method.invoke(proxy, args); // 不行
+        System.out.println(2);
         return result;
     }
 
@@ -43,10 +45,11 @@ public class ProxyInvocationHandler implements InvocationHandler {
 
         //动态生成代理类
         UserService proxy = (UserService) pih.getProxy();
-        proxy.select();
-        userService.set("jay");
-        proxy.select();
-        proxy.set("jay");
-        proxy.select();
+//        proxy.select();
+//        userService.set("jay");
+//        proxy.select();
+//        proxy.set("jay");
+//        proxy.select();
+        proxy.a();
     }
 }
