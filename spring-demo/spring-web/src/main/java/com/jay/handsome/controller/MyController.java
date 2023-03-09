@@ -23,6 +23,12 @@ public class MyController {
 
     @Autowired
     private MyFactoryBean myFactoryBean;
+
+    @Autowired
+    private MyServiceB myServiceB;
+
+    @Autowired
+    private MyServiceB myServiceB1;
     @GetMapping
     public void test() {
         myService.myFunc();

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
  * @author jay
  * @date 2022/12/19 15:41
  */
-@Component
+//@Component
 public class MyFactoryBeanB implements SmartFactoryBean {
     @Override
     public Object getObject() throws Exception {

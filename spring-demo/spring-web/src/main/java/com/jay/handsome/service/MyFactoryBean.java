@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
  * @author jay
  * @date 2022/12/19 15:41
  */
-//@Component
+@Component
 public class MyFactoryBean implements SmartFactoryBean {
     @Override
     public Object getObject() throws Exception {
@@ -19,5 +19,20 @@ public class MyFactoryBean implements SmartFactoryBean {
     @Override
     public Class<?> getObjectType() {
         return MyServiceB.class;
+    }
+
+//    @Override
+//    public boolean isPrototype() {
+//        return true;
+//    }
+
+    /**
+     * 以这个为准
+     *
+     * @return
+     */
+    @Override
+    public boolean isSingleton() {
+        return true;
     }
 }
