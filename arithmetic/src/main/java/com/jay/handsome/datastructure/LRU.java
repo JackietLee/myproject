@@ -4,7 +4,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
- * 注释
+ * LRU  Least Recently Used 最近最少使用
  *
  * @author jay
  * @date 2022/9/1 11:48

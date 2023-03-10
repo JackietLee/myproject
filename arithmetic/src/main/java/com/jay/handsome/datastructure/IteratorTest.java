@@ -5,7 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * 注释
+ * fail-fast   快速失败
  *
  * @author jay
  * @date 2022/10/14 14:59

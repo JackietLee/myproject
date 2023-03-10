@@ -6,7 +6,7 @@ import org.springframework.core.ResolvableType;
 import java.lang.reflect.*;
 
 /**
- * 注释
+ * 如何获取泛型具体类型   Gson的TypeToken
  *
  * @author jay
  * @date 2022/10/20 17:23
