@@ -1,4 +1,4 @@
-package com.jay.handsome
+package com.jay.handsome.scalaTest
 
 import com.jay.handsome.cglib.Person
 

@@ -1,5 +1,5 @@
 package com.jay.handsome
 
-class TestScala {
+package object scalaTest {
 
 }
