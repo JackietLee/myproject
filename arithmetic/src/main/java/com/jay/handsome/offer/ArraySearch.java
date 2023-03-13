@@ -1,5 +1,7 @@
 package com.jay.handsome.offer;
 
+import java.util.HashMap;
+
 /**
  * https://leetcode.cn/problems/ju-zhen-zhong-de-lu-jing-lcof/
  *
@@ -54,5 +56,16 @@ public class ArraySearch {
         String s = "aaaaaaaaaaaaa";
         boolean exist = new ArraySearch().exist(chars, s);
         System.out.println(exist);
+        String s1 = "0x2C";
+        char[] chars1 = s1.toCharArray();
+        int i = chars1[2];
+
+        System.out.println();
+        String str = "aaaa";
+        char[] charArr = str.toCharArray();
+        HashMap<Character,Integer> map = new HashMap<Character,Integer>();
+        for(char c:charArr) {
+            map.put((char) (c-'a'),map.getOrDefault(c-'a',0)+1);
+        }
     }
 }

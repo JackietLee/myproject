@@ -1,5 +1,9 @@
 package com.jay.handsome.sortMethod;
 
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+
 public class QuickSort {
 
     public void quickSort(int[] arr) {
@@ -15,8 +19,8 @@ public class QuickSort {
         for (int i = l+1; i <= r ; i++) {
             if (arr[i] < v) {
                 int temp = arr[i];
-                arr[i] = arr[j++];
-                arr[j++] = temp;
+                arr[i] = arr[++j];
+                arr[++j] = temp;
             }
         }
         int temp = arr[l];
@@ -33,5 +37,23 @@ public class QuickSort {
         i = 1;
         j = ++i;
         System.out.println(j);
+        i = 1;
+        test(i++);
+        i = 1;
+        test(++i);
     }
+
+    public static void test(int i) {
+        HashSet s = new HashSet<Integer>();
+        int[] arr = new int[6];
+                System.out.println(i);
+        switch (arr[i]){
+            case 1:
+        }
+        HashMap<Object, Object> objectObjectHashMap = new HashMap<>();
+        for (Map.Entry<Object, Object> objectObjectEntry : objectObjectHashMap.entrySet()) {
+
+        }
+    }
+
 }
