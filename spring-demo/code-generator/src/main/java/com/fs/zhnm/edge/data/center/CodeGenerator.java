@@ -101,7 +101,7 @@ public class CodeGenerator {
 
         // 4、包配置
         PackageConfig pc = new PackageConfig();
-        pc.setModuleName(PROPS.getStr("fatherPackageName")); //模块名
+//        pc.setModuleName(PROPS.getStr("fatherPackageName")); //模块名
         //包  com.test
         pc.setParent(PROPS.getStr("package"));
         //包  com.test.controller

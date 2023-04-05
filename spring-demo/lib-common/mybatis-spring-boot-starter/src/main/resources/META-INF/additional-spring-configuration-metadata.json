@@ -1,0 +1,38 @@
+{
+  "properties": [
+  {
+    "name": "famsun.mybatis-plus.tenant.enable",
+    "type": "java.lang.Boolean",
+    "defaultValue": false,
+    "description": "是否开启多租户"
+  },
+  {
+    "name": "famsun.mybatis-plus.tenant.tenant-id-column",
+    "type": "java.lang.String",
+    "sourceType": "com.fs.zhnm.mybatis.common.tenant.TenantProperties",
+    "defaultValue": "tenement_id",
+    "description": "多租户字段"
+  },
+  {
+    "name": "famsun.mybatis-plus.tenant.ignore-table",
+    "type": "java.util.List",
+    "sourceType": "com.fs.zhnm.mybatis.common.tenant.TenantProperties",
+    "defaultValue": [],
+    "description": "多租户忽略表名"
+  },
+  {
+    "name": "famsun.mybatis-plus.tenant.ignore-statement",
+    "type": "java.util.List",
+    "sourceType": "com.fs.zhnm.mybatis.common.tenant.TenantProperties",
+    "defaultValue": [],
+    "description": "多租户忽略sql statementid"
+  },
+  {
+    "name": "famsun.mybatis-plus.tenant.ignore-dao",
+    "type": "java.util.List",
+    "sourceType": "com.fs.zhnm.mybatis.common.tenant.TenantProperties",
+    "defaultValue": [],
+    "description": "多租户忽略sql statementid"
+  }
+  ]
+}

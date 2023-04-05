@@ -1,0 +1,33 @@
+server:
+  port: 10002
+
+mybatis-plus:
+  mapper-locations: classpath:mapper/**/*.xml
+  global-config:
+    banner: true
+    db-config:
+      id-type: auto
+      logic-delete-field: state
+      logic-delete-value: 0
+      logic-not-delete-value: 1
+      select-strategy: not_empty #查询策略 条件不为空
+  configuration:
+    map-underscore-to-camel-case: true #驼峰与下划线转换
+    call-setters-on-nulls: true #值为null时也会调用setter方法赋值
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #开启sql日志
+
+spring:
+  application:
+    name: mysql
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    #    url: jdbc:mysql://192.168.0.147:30001/breed?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=UTF-8
+#    url: jdbc:mysql://192.168.0.175:3306/breed?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=UTF-8
+    url: jdbc:mysql://localhost:3306/springproject?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=UTF-8
+    username: root
+    password: root
+
