@@ -13,7 +13,6 @@
     <packaging>pom</packaging>
     <modules>
         <module>spring-web</module>
-        <module>spring-gateway</module>
         <module>spring-mysql</module>
     </modules>
     <properties>
@@ -30,7 +29,7 @@
                 <executions>
                     <execution>
                         <goals>
-                            <goal>repackage</goal>
+                            <goal>repackage</goal>  <!--parent不是spring-boot-dependencies要加-->
                         </goals>
                     </execution>
                 </executions>

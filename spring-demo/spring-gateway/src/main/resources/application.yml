@@ -1,0 +1,19 @@
+spring:
+  profiles:
+    active: dev
+  cloud:
+    gateway:
+      routes:
+        - id: web
+          uri: lb://web
+          predicates:
+            - Path=/web/**
+          filters:
+            - StripPrefix=1
+
+server:
+  port: 10003
+
+#feign:
+#  circuitbreaker:
+#    enabled: true
