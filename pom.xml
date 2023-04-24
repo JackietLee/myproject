@@ -10,6 +10,7 @@
     <modules>
         <module>arithmetic</module>
         <module>spring-demo</module>
+        <module>lucene-project</module>
     </modules>
 
     <properties>
