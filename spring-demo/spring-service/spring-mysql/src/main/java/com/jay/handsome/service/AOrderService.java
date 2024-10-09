@@ -2,16 +2,16 @@ package com.jay.handsome.service;
 
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.jay.handsome.entity.User;
+import com.jay.handsome.entity.AOrder;
 
 /**
  * <p>
- *  服务类
+ * a订单 服务类
  * </p>
  *
  * @author jay
- * @since 2023-04-04
+ * @since 2024-09-11
  */
-public interface UserService extends IService<User> {
+public interface AOrderService extends IService<AOrder> {
 
 }

@@ -20,6 +20,7 @@
         <connector.version>8.0.28</connector.version>
         <springcloudAlibaba.version>2021.0.1.0</springcloudAlibaba.version>
         <starter.version>1.0-SNAPSHOT</starter.version>
+        <knife4j.version>4.4.0</knife4j.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -84,6 +85,11 @@
                 <groupId>com.jay.handsome</groupId>
                 <artifactId>web-spring-boot-starter</artifactId>
                 <version>${starter.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>knife4j-openapi2-spring-boot-starter</artifactId>
+                <version>${knife4j.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
