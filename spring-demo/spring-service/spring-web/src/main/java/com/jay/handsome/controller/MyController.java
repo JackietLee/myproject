@@ -1,7 +1,5 @@
 package com.jay.handsome.controller;
 
-import com.alibaba.csp.sentinel.annotation.SentinelResource;
-import com.alibaba.csp.sentinel.slots.block.BlockException;
 import com.handsome.jay.common.Rt;
 import com.jay.handsome.entity.User;
 import com.jay.handsome.feign.UserInfoFeign;
@@ -49,19 +47,7 @@ public class MyController {
     }
 
     @GetMapping("/{id}")
-    @SentinelResource(value = "list", blockHandler = "exceptionHandler",fallback = "helloFallback")
     public Rt<User> getById(@PathVariable Integer id) {
         return userInfoFeign.getById(id);
     }
-
-    public Rt<User> helloFallback(long s) {
-        return Rt.fail(String.format("Halooooo %d", s));
-    }
-
-    public Rt<User> exceptionHandler(long s, BlockException ex) {
-        // Do some log here.
-        ex.printStackTrace();
-        return Rt.fail("Oops, error occurred at " + s);
-    }
-
 }

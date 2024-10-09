@@ -12,7 +12,6 @@
         <module>code-generator</module>
         <module>lib-common</module>
         <module>spring-service</module>
-        <module>spring-gateway</module>
     </modules>
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
