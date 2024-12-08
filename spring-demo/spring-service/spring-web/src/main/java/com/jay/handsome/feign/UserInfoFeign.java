@@ -34,4 +34,7 @@ public interface UserInfoFeign {
 
     @GetMapping("/{id}")
     public Rt<User> getById(@PathVariable("id") Integer id);
+
+    @GetMapping("/{name}")
+    public Rt<User> getByName(@PathVariable("name") String name);
 }

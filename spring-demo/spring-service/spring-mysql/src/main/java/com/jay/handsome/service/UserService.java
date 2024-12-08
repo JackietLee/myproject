@@ -14,4 +14,5 @@ import com.jay.handsome.entity.User;
  */
 public interface UserService extends IService<User> {
 
+    User getByName(Integer id);
 }

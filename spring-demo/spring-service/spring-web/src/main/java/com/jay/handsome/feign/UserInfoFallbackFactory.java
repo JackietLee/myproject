@@ -24,6 +24,11 @@ public class UserInfoFallbackFactory implements FallbackFactory<UserInfoFeign> {
             public Rt<User> getById(Integer id) {
                 return Rt.fail(cause.getMessage());
             }
+
+            @Override
+            public Rt<User> getByName(String name) {
+                return Rt.fail(cause.getMessage());
+            }
         };
     }
 }

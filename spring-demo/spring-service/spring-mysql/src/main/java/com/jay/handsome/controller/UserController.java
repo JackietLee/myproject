@@ -47,6 +47,16 @@ public class UserController {
     }
 
     /**
+     * 根据id查询数据接口
+     * @param id
+     * @return
+     */
+    @GetMapping("/{name}")
+    public Rt<User> getByName(@PathVariable Integer id){
+        return Rt.ok(userService.getByName(id));
+    }
+
+    /**
      * 分页查询接口
      * @param pageNum
      * @param pageSize

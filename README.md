@@ -12,3 +12,7 @@ https://github.com/ermaozi/get_subscribe
 https://github.com/freefq/free
 
 https://acl4ssr-sub.github.io
+
+
+redis-server redis.windows.conf
+startup.cmd -m standalone

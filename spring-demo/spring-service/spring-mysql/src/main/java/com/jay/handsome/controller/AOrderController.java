@@ -28,7 +28,6 @@ public class AOrderController {
 
     @Resource
     private AOrderService aOrderService;
-
     /**
      * 查询所有接口
      * @return

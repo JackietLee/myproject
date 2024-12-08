@@ -50,4 +50,9 @@ public class MyController {
     public Rt<User> getById(@PathVariable Integer id) {
         return userInfoFeign.getById(id);
     }
+
+    @GetMapping("/{name}")
+    public Rt<User> getByName(@PathVariable("name") String name) {
+        return userInfoFeign.getByName(name);
+    }
 }
