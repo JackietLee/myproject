@@ -23,14 +23,40 @@ spring:
     nacos:
       discovery:
         server-addr: localhost:8848
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    #    url: jdbc:mysql://192.168.0.147:30001/breed?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=UTF-8
-#    url: jdbc:mysql://192.168.0.175:3306/breed?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=UTF-8
-    url: jdbc:mysql://localhost:3306/springproject?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=UTF-8
-    username: root
-    password: root24785126
-
+#  datasource:
+#    type: com.zaxxer.hikari.HikariDataSource
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+##        url: jdbc:mysql://192.168.0.147:30001/breed?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=UTF-8
+##    url: jdbc:mysql://192.168.0.175:3306/breed?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=UTF-8
+#    url: jdbc:mysql://localhost:3306/springproject?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=UTF-8
+#    username: root
+#    password: root24785126
+  shardingsphere:
+    datasource:
+      names: ds0
+      ds0:
+        type: com.zaxxer.hikari.HikariDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        jdbc-url: jdbc:mysql://localhost:3306/springproject?useSSL=false&serverTimezone=UTC
+        username: root
+        password: root24785126
+        hikari:
+          maximum-pool-size: 20
+          minimum-idle: 5
+          idle-timeout: 30000
+          connection-timeout: 30000
+          max-lifetime: 1800000
+    sharding:
+      tables:
+        a_order:
+          actual-data-nodes: ds0.a_order_$->{0..1}
+          table-strategy:
+            inline:
+              sharding-column: id
+              algorithm-expression: a_order_$->{id % 2}
+      binding-tables: a_order
+      default-database-strategy:
+        none:
 knife4j:
   enable: true
   openapi:
