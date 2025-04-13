@@ -7,7 +7,7 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-public class User2Role {
+public class Role2Path {
     private Integer id;
     private Integer userId;
     private Integer roleId;

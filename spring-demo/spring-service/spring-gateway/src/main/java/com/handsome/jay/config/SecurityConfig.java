@@ -1,80 +1,105 @@
 package com.handsome.jay.config;
 
-import net.bytebuddy.build.Plugin;
-import org.checkerframework.checker.units.qual.A;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.DelegatingReactiveAuthenticationManager;
+import org.springframework.security.authentication.ReactiveAuthenticationManager;
+import org.springframework.security.authentication.UserDetailsRepositoryReactiveAuthenticationManager;
+import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
+import org.springframework.security.config.web.server.ServerHttpSecurity;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.server.SecurityWebFilterChain;
+import reactor.core.publisher.Mono;
+import javax.annotation.Resource;
+import java.util.LinkedList;
 
-import javax.servlet.http.HttpServletResponse;
-import java.io.PrintWriter;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadPoolExecutor;
+@EnableWebFluxSecurity
+public class SecurityConfig {
 
-@Configuration
-@EnableGlobalMethodSecurity(prePostEnabled = true)
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
+    @Resource
+    private DefaultAuthorizationManager defaultAuthorizationManager;
 
-    @Autowired
-    private CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
+    @Resource
+    @Lazy
+    private UserDetailsServiceImpl userDetailsServiceImpl;
 
-    @Autowired
-    private CustomAuthenticationFailureHandler customAuthenticationFailureHandler;
+    @Resource
+    private DefaultAuthenticationSuccessHandler defaultAuthenticationSuccessHandler;
 
-    //此时数据库中的密码不能为明文密码，应为BCryptPassword编码过的密码
-    @Bean
-    public PasswordEncoder passwordEncoder(){
-//        return new BCryptPasswordEncoder();
-        return NoOpPasswordEncoder.getInstance();
-    }
+    @Resource
+    private DefaultAuthenticationFailureHandler defaultAuthenticationFailureHandler;
 
-//    @Override
-//    protected void configure(HttpSecurity http) throws Exception {
-//        http
-//                //关闭csrf
-//                .csrf().disable()
-//                .sessionManagement()
-//                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-//                .and()
-//                .authorizeRequests()
-//                .anyRequest()
-//                .authenticated()//所有请求都需要访问
-//        ;
-//        //允许跨域
-//        http.cors();
-//    }
+    @Resource
+    private TokenAuthenticationManager tokenAuthenticationManager;
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable() // 禁用 CSRF 保护
-                .authorizeRequests()
-                .antMatchers("/login", "/logout").permitAll() // 允许所有人访问登录和登出接口
-                .anyRequest().authenticated() // 其他请求需要认证
-                .and()
-                .formLogin().successHandler(customAuthenticationSuccessHandler) // 登录成功处理器
-                .failureHandler(customAuthenticationFailureHandler) // 登录失败处理器
-                .and()
-                .logout().logoutSuccessHandler((request, response, authentication) -> {
-                    response.setContentType("application/json");
-                    response.setStatus(HttpServletResponse.SC_OK);
-                    PrintWriter out = response.getWriter();
-                    out.write("{\"status\": \"logout success\"}");
-                    out.flush();
-                    out.close();
-                }); // 登出成功处理器
-    }
+    @Resource
+    private DefaultSecurityContextRepository defaultSecurityContextRepository;
+
+    @Resource
+    private DefaultAuthenticationEntryPoint defaultAuthenticationEntryPoint;
+
+    @Resource
+    private DefaultAccessDeniedHandler defaultAccessDeniedHandler;
+
+    /**
+     * 自定义过滤权限
+     */
+    @Value("${security.noFilter}")
+    private String noFilter;
 
     @Bean
-    public AuthenticationManager authenticationManager() throws Exception {
-        return super.authenticationManagerBean();
+    public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity httpSecurity) {
+        httpSecurity
+                // 登录认证处理
+                .authenticationManager(reactiveAuthenticationManager())
+                .securityContextRepository(defaultSecurityContextRepository)
+                // 请求拦截处理
+                .authorizeExchange(exchange -> exchange
+                        .pathMatchers(noFilter).permitAll()
+                        .pathMatchers(HttpMethod.OPTIONS).permitAll()
+                        .anyExchange().access(defaultAuthorizationManager)
+                )
+                .formLogin()
+                // 自定义处理
+                .authenticationSuccessHandler(defaultAuthenticationSuccessHandler)
+                .authenticationFailureHandler(defaultAuthenticationFailureHandler)
+                .and()
+                .exceptionHandling()
+                .authenticationEntryPoint(defaultAuthenticationEntryPoint)
+                .and()
+                .exceptionHandling()
+                .accessDeniedHandler(defaultAccessDeniedHandler)
+                .and()
+                .csrf().disable()
+        ;
+        return httpSecurity.build();
+    }
+
+    /**
+     * BCrypt密码编码
+     */
+    @Bean("passwordEncoder")
+    public PasswordEncoder passwordEncoder() {
+        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+    }
+
+    /**
+     * 注册用户信息验证管理器，可按需求添加多个按顺序执行
+     */
+    @Bean
+    ReactiveAuthenticationManager reactiveAuthenticationManager() {
+        LinkedList<ReactiveAuthenticationManager> managers = new LinkedList<>();
+        managers.add(authentication -> {
+            // 其他登陆方式 (比如手机号验证码登陆) 可在此设置不得抛出异常或者 Mono.error
+            return Mono.empty();
+        });
+        // 必须放最后不然会优先使用用户名密码校验但是用户名密码不对时此 AuthenticationManager 会调用 Mono.error 造成后面的 AuthenticationManager 不生效
+        managers.add(new UserDetailsRepositoryReactiveAuthenticationManager(userDetailsServiceImpl));
+        managers.add(tokenAuthenticationManager);
+        return new DelegatingReactiveAuthenticationManager(managers);
     }
 }
 

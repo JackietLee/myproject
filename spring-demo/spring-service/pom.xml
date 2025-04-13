@@ -15,6 +15,7 @@
         <module>spring-web</module>
         <module>spring-gateway</module>
         <module>spring-mysql</module>
+        <module>spring-auth</module>
     </modules>
     <properties>
         <maven.compiler.source>11</maven.compiler.source>

@@ -1,8 +1,5 @@
-package com.jay.handsome.entity;
+package com.handsome.jay.feign;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -26,8 +23,7 @@ public class User implements Serializable {
 
     private static final long serialVersionUID=1L;
 
-    @TableId(type = IdType.ASSIGN_ID)
-    private Integer id;
+    private Long id;
 
     private String  name;
 
@@ -35,9 +31,7 @@ public class User implements Serializable {
 
     private String password;
 
-    @TableField(exist = false)
     private List<Role> roles;
 
-    @TableField(exist = false)
-    private List<String> paths;
+
 }

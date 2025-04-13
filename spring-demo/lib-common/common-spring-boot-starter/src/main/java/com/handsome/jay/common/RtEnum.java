@@ -21,6 +21,7 @@ public enum RtEnum {
      * 业务执行异常，带上业务异常提示信息
      */
     FAILURE(500, "请求业务执行异常！"),
+    ACCOUNT_OR_PASSWORD_ERROR(501, "账号或者密码不存在！"),
     PERMISSION_DENY(403, "请求资源权限验证失败！"),
     SESSION_TIMEOUT(408, "客户会话已经超时！"),
     PARAMETER_ILLEGAL(412, "请求参数验证失败！"),

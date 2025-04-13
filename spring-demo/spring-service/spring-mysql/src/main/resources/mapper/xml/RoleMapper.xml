@@ -3,6 +3,6 @@
 <mapper namespace="com.jay.handsome.dao.RoleDao">
 
     <select id="getRoleByUserId" resultType="com.jay.handsome.entity.Role">
-        select r.* from role r,user_role ur where r.id=ur.role_id and ur.user_id=#{userId}
+        select r.* from role r,user2role ur where r.id=ur.role_id and ur.user_id=#{userId}
     </select>
 </mapper>

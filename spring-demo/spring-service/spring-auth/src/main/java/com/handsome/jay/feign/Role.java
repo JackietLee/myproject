@@ -5,7 +5,6 @@ import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
-import java.util.List;
 
 /**
  * <p>
@@ -19,19 +18,12 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 //@ApiModel(value="User对象", description="")
-public class User implements Serializable {
+public class Role implements Serializable {
 
     private static final long serialVersionUID=1L;
 
-    private Long id;
+    private Integer id;
 
     private String  name;
 
-    private Integer age;
-
-    private String password;
-
-    private List<Role> roles;
-
-    private List<String> paths;
 }

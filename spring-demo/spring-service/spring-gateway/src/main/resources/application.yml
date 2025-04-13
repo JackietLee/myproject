@@ -10,10 +10,29 @@ spring:
             - Path=/web/**
           filters:
             - StripPrefix=1
-
+        - id: auth
+          uri: lb://auth
+          predicates:
+            - Path=/auth/**
+          filters:
+            - StripPrefix=1
+        - id: mysql
+          uri: lb://mysql
+          predicates:
+            - Path=/mysql/**
+          filters:
+            - StripPrefix=1
 server:
   port: 10003
 
 #feign:
 #  circuitbreaker:
 #    enabled: true
+jwt:
+  token:
+    expired: 3600000
+    refresh:
+      expired: 3600000
+
+security:
+  noFilter: /login

@@ -3,12 +3,10 @@
  * 不能修改和删除上面的版权声明
  * 此代码属于深圳丰尚智慧农牧研发中心部门编写，在未经允许的情况下不得传播复制
  */
-package com.jay.handsome.feign;
+package com.handsome.jay.feign;
 
 
 import com.handsome.jay.common.Rt;
-import com.jay.handsome.entity.User;
-import com.jay.handsome.vo.UserInfoVO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
