@@ -1,7 +1,8 @@
-package com.handsome.jay.config;
+package com.handsome.jay.security;
 
 import com.alibaba.fastjson.JSONObject;
 import com.handsome.jay.common.Rt;
+import com.handsome.jay.util.JwtTokenUtil;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.core.io.buffer.DataBufferFactory;

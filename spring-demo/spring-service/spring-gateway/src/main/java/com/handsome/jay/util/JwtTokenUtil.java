@@ -1,4 +1,4 @@
-package com.handsome.jay.config;
+package com.handsome.jay.util;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Clock;

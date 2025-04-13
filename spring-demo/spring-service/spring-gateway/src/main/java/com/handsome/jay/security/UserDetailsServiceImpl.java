@@ -1,14 +1,11 @@
-package com.handsome.jay.config;
+package com.handsome.jay.security;
 
-import com.google.gson.Gson;
 import com.handsome.jay.common.Rt;
-import com.handsome.jay.feign.Role;
 import com.handsome.jay.feign.User;
 import com.handsome.jay.feign.UserInfoFeign;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.ReactiveUserDetailsPasswordService;
 import org.springframework.security.core.userdetails.ReactiveUserDetailsService;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

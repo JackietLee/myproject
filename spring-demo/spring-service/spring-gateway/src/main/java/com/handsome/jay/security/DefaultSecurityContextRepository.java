@@ -1,4 +1,4 @@
-package com.handsome.jay.config;
+package com.handsome.jay.security;
 
 
 import com.alibaba.cloud.commons.lang.StringUtils;

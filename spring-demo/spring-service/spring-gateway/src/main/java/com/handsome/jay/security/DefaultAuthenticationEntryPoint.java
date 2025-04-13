@@ -1,15 +1,14 @@
-package com.handsome.jay.config;
+package com.handsome.jay.security;
 
 import com.alibaba.fastjson.JSONObject;
-
 import com.handsome.jay.common.Rt;
 import com.handsome.jay.common.RtEnum;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.core.io.buffer.DataBufferFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.security.access.AccessDeniedException;
-import org.springframework.security.web.server.authorization.ServerAccessDeniedHandler;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.web.server.ServerAuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
@@ -19,17 +18,17 @@ import java.nio.charset.Charset;
 /**
  * @author ShiLei
  * @version 1.0.0
- * @date 2021/3/11 11:12
- * @description 鉴权管理
+ * @date 2021/3/11 15:17
+ * @description 未认证处理
  */
 @Component
-public class DefaultAccessDeniedHandler implements ServerAccessDeniedHandler {
+public class DefaultAuthenticationEntryPoint implements ServerAuthenticationEntryPoint {
 
     @Override
-    public Mono<Void> handle(ServerWebExchange exchange, AccessDeniedException denied) {
+    public Mono<Void> commence(ServerWebExchange exchange, AuthenticationException ex) {
         return Mono.defer(() -> Mono.just(exchange.getResponse()))
                 .flatMap(response -> {
-                    response.setStatusCode(HttpStatus.OK);
+                    response.setStatusCode(HttpStatus.UNAUTHORIZED);
                     response.getHeaders().setContentType(MediaType.APPLICATION_JSON);
                     DataBufferFactory dataBufferFactory = response.bufferFactory();
                     String result = JSONObject.toJSONString(new Rt<>(RtEnum.PERMISSION_DENY));

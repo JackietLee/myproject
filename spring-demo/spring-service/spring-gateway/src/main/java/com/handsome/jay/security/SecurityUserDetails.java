@@ -1,4 +1,4 @@
-package com.handsome.jay.config;
+package com.handsome.jay.security;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
