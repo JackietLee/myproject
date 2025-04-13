@@ -62,7 +62,7 @@ CREATE TABLE `role2path` (
                              `path_id` bigint DEFAULT NULL,
                              `id` int NOT NULL AUTO_INCREMENT,
                              PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE `user` (
                         `id` int DEFAULT NULL,
@@ -76,4 +76,4 @@ CREATE TABLE `user2role` (
                              `role_id` int DEFAULT NULL,
                              `id` int NOT NULL AUTO_INCREMENT,
                              PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
